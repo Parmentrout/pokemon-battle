@@ -15,7 +15,6 @@ export default class TypeAheadDropDown extends React.Component {
  
  onTextChange = (e) => {
    const {items} = this.props;
-   console.log(this.props);
    let suggestions = [];
    const value = e.target.value;
    if (value.length > 0) {
@@ -40,13 +39,13 @@ export default class TypeAheadDropDown extends React.Component {
  
  renderSuggestions = () => {
    const { suggestions } = this.state;
-   console.log("suggestions :",suggestions);
    if (suggestions.length === 0) {
      return null;
    }
+   const topTen = suggestions.slice(0,10);
    return (
      <ul>
-       {suggestions.map(city => <li key={city} onClick={(e)=>this.suggestionSelected(city)}>{city}</li>)}
+       {topTen.map(s => <li key={s} onClick={(e)=>this.suggestionSelected(s)}>{s}</li>)}
      </ul>
    )
  }

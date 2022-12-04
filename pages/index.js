@@ -40,6 +40,7 @@ export default function Home({ preRenderedData }) {
           <div className={styles.card}>
             <h2>Player 2 &rarr;</h2>
             <p>Choose your Pokemon</p>
+            <TypeAheadDropDown items={pokemonNames} />
           </div>
         </div>
       </main>
