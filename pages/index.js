@@ -65,12 +65,3 @@ export default function Home() {
     </div>
   )
 }
-
-// export async function getServerSideProps() {
-//   // Fetch data from external API
-//   const res = await fetch(`https://pokeapi.co/api/v2/pokemon/ditto`)
-//   const data = await res.json()
-
-//   // Pass data to the page via props
-//   return { props: { data } }
-// }
