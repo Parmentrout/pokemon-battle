@@ -43,7 +43,7 @@ export default class TypeAheadDropDown extends React.Component {
    if (suggestions.length === 0) {
      return null;
    }
-   const topTen = suggestions.slice(0,10);
+   const topTen = suggestions.slice(0,20);
    return (
      <ul>
        {topTen.map(s => <li key={s} onClick={(e)=>this.suggestionSelected(s)}>{s}</li>)}
