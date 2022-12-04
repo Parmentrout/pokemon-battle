@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head'
 import TypeAheadDropDown from '../src/TypeAheadDropDown';
+import PokemonContainer from '../src/PokemonContainer';
 import styles from '../styles/Home.module.css'
 
 export default function Home({ preRenderedData }) {
@@ -30,19 +31,7 @@ export default function Home({ preRenderedData }) {
           <code className={styles.code}>{JSON.stringify(dataInsideTheComponent)}</code>
         </p> */}
 
-        <div className={styles.grid}>
-          <div className={styles.card}>
-            <h2>Player 1 &rarr;</h2>
-            <p>Choose your Pokemon</p>
-            <TypeAheadDropDown items={pokemonNames} />
-          </div>
-
-          <div className={styles.card}>
-            <h2>Player 2 &rarr;</h2>
-            <p>Choose your Pokemon</p>
-            <TypeAheadDropDown items={pokemonNames} />
-          </div>
-        </div>
+        <PokemonContainer allPokemon={pokemonNames} />
       </main>
 
       <footer className={styles.footer}>

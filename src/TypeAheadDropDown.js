@@ -28,9 +28,10 @@ export default class TypeAheadDropDown extends React.Component {
      text:value
    }));
  }
- 
+
  
  suggestionSelected=(value)=>{
+    this.props.onSelected(value);
    this.setState(()=>({
      text:value,
      suggestions:[]
