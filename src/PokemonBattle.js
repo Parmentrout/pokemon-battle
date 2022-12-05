@@ -25,9 +25,8 @@ export default class PokemonBattle extends React.Component {
         const url = `https://pokeapi.co/api/v2/pokemon/${pokemon}`;
         let res = await fetch(url);
         let pokemonData = await res.json();
-        console.log(pokemonData);
+        //console.log(pokemonData);
         const heads = (Math.floor(Math.random() * 2) == 0);
-        console.log(heads);
         const totalHealth = pokemonData.stats[0].base_stat + pokemonData.stats[2].base_stat; // HP + Defense
         if (player === 1) {
             await this.setState(
@@ -53,6 +52,7 @@ export default class PokemonBattle extends React.Component {
                 }
             )
         }
+        console.log(this.state);
     }
     async componentDidMount() {
         const { player1, player2 } = this.props;
@@ -65,6 +65,7 @@ export default class PokemonBattle extends React.Component {
         if (playerInitiated === 1) {
             let newHealth = this.state.pokemon2PageData.health - attackAmount;
             if (newHealth < 0 ) { newHealth = 0; }
+            console.log(this.state);
             await this.setState(
                 {
                     pokemon1PageData: {
@@ -84,6 +85,7 @@ export default class PokemonBattle extends React.Component {
         if (playerInitiated === 2) {
             let newHealth = this.state.pokemon1PageData.health - attackAmount;
             if (newHealth < 0 ) { newHealth = 0; }
+            console.log(this.state);
             await this.setState(
                 {
                     pokemon1PageData: {
@@ -117,8 +119,8 @@ export default class PokemonBattle extends React.Component {
                             return <li>{x.ability.name}</li>
                         })}
                     </ul>
-                    <button onClick={() => this.attackPlayer(1,0)} disabled={!pokemon1PageData.turn}>Attack!</button>
-                    <button onClick={() => this.attackPlayer(1,1)} disabled={!pokemon1PageData.turn && !pokemon1PageData.specialAttackUsed}>Special Attack!</button>
+                    <button onClick={() => this.attackPlayer(1,false)} disabled={!pokemon1PageData.turn}>Attack!</button>
+                    <button onClick={() => this.attackPlayer(1,true)} disabled={!pokemon1PageData.turn || pokemon1PageData.specialAttackUsed}>Special Attack!</button>
                 </div>
                 <div className={styles.card}>
                     <h2>{ pokemon2.name }</h2>
@@ -130,8 +132,8 @@ export default class PokemonBattle extends React.Component {
                             return <li>{x.ability.name}</li>
                         })}
                     </ul>
-                    <button onClick={() => this.attackPlayer(2,0)} disabled={!pokemon2PageData.turn}>Attack!</button>
-                    <button onClick={() => this.attackPlayer(2,1)} disabled={!pokemon2PageData.turn && !pokemon2PageData.specialAttackUsed}>Special Attack!</button>
+                    <button onClick={() => this.attackPlayer(2,false)} disabled={!pokemon2PageData.turn}>Attack!</button>
+                    <button onClick={() => this.attackPlayer(2,true)} disabled={!pokemon2PageData.turn || pokemon2PageData.specialAttackUsed}>Special Attack!</button>
                 </div>
             </div>
         )

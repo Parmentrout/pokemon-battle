@@ -23,7 +23,7 @@ export default function Home({ preRenderedData }) {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to the Thunderdome
+          Pokemon Battle
         </h1>
 {/* 
         <p className={styles.description}>
