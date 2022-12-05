@@ -120,6 +120,7 @@ export default class PokemonBattle extends React.Component {
                     <h2>{ pokemon1.name }</h2>
                     <div>Total Health: <span className={styles.red}>{pokemon1PageData.health}</span></div>
                     <img 
+                        className={styles.battleImage}
                         src={pokemon1 && pokemon1.id && `https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${pokemon1.id}.svg`} 
                         alt="No image found"    
                     />
@@ -129,13 +130,14 @@ export default class PokemonBattle extends React.Component {
                             return <li key={x.ability.name}>{x.ability.name}</li>
                         })}
                     </ul>
-                    <button onClick={() => this.attackPlayer(1,false)} disabled={!pokemon1PageData.turn}>Attack! ({pokemon1 && pokemon1.stats && pokemon1.stats[1].base_stat})</button>
-                    <button onClick={() => this.attackPlayer(1,true)} disabled={!pokemon1PageData.turn || pokemon1PageData.specialAttackUsed}>Special Attack! ({pokemon1 && pokemon1.stats && pokemon1.stats[3].base_stat})</button>
+                    <button className={styles.niceButton} onClick={() => this.attackPlayer(1,false)} disabled={!pokemon1PageData.turn}>Attack! ({pokemon1 && pokemon1.stats && pokemon1.stats[1].base_stat})</button>
+                    <button className={styles.niceButton} onClick={() => this.attackPlayer(1,true)} disabled={!pokemon1PageData.turn || pokemon1PageData.specialAttackUsed}>Special Attack! ({pokemon1 && pokemon1.stats && pokemon1.stats[3].base_stat})</button>
                 </div>
                 <div className={styles.card}>
                     <h2>{ pokemon2.name }</h2>
                     <div>Total Health: <span className={styles.red}>{pokemon2PageData.health}</span></div>
-                    <img 
+                    <img
+                        className={styles.battleImage}
                         src={pokemon2 && pokemon2.id && `https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${pokemon2.id}.svg`} 
                         alt="No images found"
                         />
@@ -145,8 +147,8 @@ export default class PokemonBattle extends React.Component {
                             return <li key={x.ability.name}>{x.ability.name}</li>
                         })}
                     </ul>
-                    <button onClick={() => this.attackPlayer(2,false)} disabled={!pokemon2PageData.turn}>Attack! ({pokemon2 && pokemon2.stats && pokemon2.stats[1].base_stat})</button>
-                    <button onClick={() => this.attackPlayer(2,true)} disabled={!pokemon2PageData.turn || pokemon2PageData.specialAttackUsed}>Special Attack! ({pokemon2 && pokemon2.stats && pokemon2.stats[3].base_stat})</button>
+                    <button className={styles.niceButton} onClick={() => this.attackPlayer(2,false)} disabled={!pokemon2PageData.turn}>Attack! ({pokemon2 && pokemon2.stats && pokemon2.stats[1].base_stat})</button>
+                    <button className={styles.niceButton} onClick={() => this.attackPlayer(2,true)} disabled={!pokemon2PageData.turn || pokemon2PageData.specialAttackUsed}>Special Attack! ({pokemon2 && pokemon2.stats && pokemon2.stats[3].base_stat})</button>
                 </div>
             </div>
         )

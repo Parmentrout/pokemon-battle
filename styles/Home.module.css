@@ -9,7 +9,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
 }
 
 .footer {
@@ -65,9 +65,13 @@
     Bitstream Vera Sans Mono, Courier New, monospace;
 }
 
+.battleImage {
+  max-height: 250px;
+}
+
 .grid {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
   flex-wrap: wrap;
   max-width: 1200px;
@@ -131,4 +135,26 @@
 .red {
   color:red;
   font-weight: bold;
+}
+
+.padding {
+  padding: 5px
+}
+
+.niceButton {
+    background-color: midnightblue;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 15px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+}
+
+.niceButton:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
 }
