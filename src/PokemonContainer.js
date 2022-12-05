@@ -1,6 +1,7 @@
 import TypeAheadDropDown from "./TypeAheadDropDown";
 import React, { useState } from 'react';
 import styles from '../styles/Home.module.css'
+import PokemonBattle from "./PokemonBattle";
 
 export default class PokemonContainer extends React.Component {
     constructor(props) {
@@ -31,7 +32,7 @@ export default class PokemonContainer extends React.Component {
 
     render() {
         const pokemonNames = this.props.allPokemon;
-        const { beginBattle } = this.state;
+        const { beginBattle, pokemon1, pokemon2 } = this.state;
         return (
             <div>
                 {!beginBattle && <div className={styles.grid}>
@@ -48,15 +49,8 @@ export default class PokemonContainer extends React.Component {
                         </div>
                     </div>
                 }
-                {beginBattle && 
-                    <div className={styles.grid}>
-                        <div className={styles.card}>
-                            Show data here
-                        </div>
-                        <div className={styles.card}>
-                            Show player 2 here
-                        </div>
-                    </div>
+                { beginBattle && 
+                    <PokemonBattle player1={pokemon1} player2={pokemon2} />
                 }
                 
             </div>
