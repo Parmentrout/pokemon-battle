@@ -9,7 +9,8 @@ export default class PokemonContainer extends React.Component {
         this.state = {
             pokemon1: '',
             pokemon2: '',
-            beginBattle: false
+            beginBattle: false,
+            hasWinner: false
         }
     }
 
@@ -22,6 +23,15 @@ export default class PokemonContainer extends React.Component {
         await this.setState({pokemon2: value});
         this.canBeginBattle();    
     }
+    
+    onWinnerDeclared = async (winner) => {
+        await this.setState(
+            {
+                hasWinner: true,
+                winner: winner
+            }
+        );
+    }
 
     canBeginBattle = async () => {
         console.log(this.state);
@@ -29,13 +39,23 @@ export default class PokemonContainer extends React.Component {
             await this.setState({beginBattle: true})
         }
     }
+    battleAgain = async () => {
+        await this.setState(
+            {
+                pokemon1: '',
+                pokemon2: '',
+                beginBattle: false,
+                hasWinner: false
+            }
+        );
+    }
 
     render() {
         const pokemonNames = this.props.allPokemon;
-        const { beginBattle, pokemon1, pokemon2 } = this.state;
+        const { beginBattle, pokemon1, pokemon2, hasWinner, winner } = this.state;
         return (
             <div>
-                {!beginBattle && <div className={styles.grid}>
+                {!beginBattle && !hasWinner && <div className={styles.grid}>
                         <div className={styles.card}>
                             <h2>Player 1 &rarr;</h2>
                             <p>Choose your Pokemon</p>
@@ -49,8 +69,20 @@ export default class PokemonContainer extends React.Component {
                         </div>
                     </div>
                 }
-                { beginBattle && 
-                    <PokemonBattle player1={pokemon1} player2={pokemon2} />
+                { beginBattle && !hasWinner &&
+                    <PokemonBattle player1={pokemon1} player2={pokemon2} onWinnerSelected={this.onWinnerDeclared} />
+                }
+                {
+                    hasWinner && 
+                    <div>
+                        <h2>Winner: {winner && winner.name}</h2>
+                        <img 
+                            src={winner && winner.id && `https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${winner.id}.svg`} 
+                            alt="No images found"
+                        />
+                        <br></br>
+                        <button onClick={this.battleAgain}>Battle Again!</button>
+                    </div>
                 }
                 
             </div>

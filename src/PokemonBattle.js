@@ -25,7 +25,7 @@ export default class PokemonBattle extends React.Component {
         const url = `https://pokeapi.co/api/v2/pokemon/${pokemon}`;
         let res = await fetch(url);
         let pokemonData = await res.json();
-        //console.log(pokemonData);
+        console.log(pokemon);
         const heads = (Math.floor(Math.random() * 2) == 0);
         const totalHealth = pokemonData.stats[0].base_stat + pokemonData.stats[2].base_stat; // HP + Defense
         if (player === 1) {
@@ -52,7 +52,7 @@ export default class PokemonBattle extends React.Component {
                 }
             )
         }
-        console.log(this.state);
+
     }
     async componentDidMount() {
         const { player1, player2 } = this.props;
@@ -61,11 +61,14 @@ export default class PokemonBattle extends React.Component {
     }
 
     attackPlayer = async (playerInitiated, isSpecial) => {
-        const attackAmount = isSpecial ? this.state.pokemon1.stats[3].base_stat : this.state.pokemon1.stats[3].base_stat;
+        let attackAmount = 0;
         if (playerInitiated === 1) {
+            attackAmount = isSpecial ? this.state.pokemon1.stats[3].base_stat : this.state.pokemon1.stats[1].base_stat;
             let newHealth = this.state.pokemon2PageData.health - attackAmount;
-            if (newHealth < 0 ) { newHealth = 0; }
-            console.log(this.state);
+            if (newHealth < 0 ) { 
+                newHealth = 0;
+                this.props.onWinnerSelected(this.state.pokemon1);
+            }
             await this.setState(
                 {
                     pokemon1PageData: {
@@ -83,8 +86,12 @@ export default class PokemonBattle extends React.Component {
         }
 
         if (playerInitiated === 2) {
+            attackAmount = isSpecial ? this.state.pokemon2.stats[3].base_stat : this.state.pokemon2.stats[1].base_stat;
             let newHealth = this.state.pokemon1PageData.health - attackAmount;
-            if (newHealth < 0 ) { newHealth = 0; }
+            if (newHealth < 0 ) { 
+                newHealth = 0;
+                this.props.onWinnerSelected(this.state.pokemon2);
+            }
             console.log(this.state);
             await this.setState(
                 {
@@ -112,28 +119,34 @@ export default class PokemonBattle extends React.Component {
                 <div className={styles.card}>
                     <h2>{ pokemon1.name }</h2>
                     <div>Total Health: <span className={styles.red}>{pokemon1PageData.health}</span></div>
-                    <img src={pokemon1 && pokemon1.id && `https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${pokemon1.id}.svg`} />
+                    <img 
+                        src={pokemon1 && pokemon1.id && `https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${pokemon1.id}.svg`} 
+                        alt="No image found"    
+                    />
                     <div><b>Abilities:</b></div>
                     <ul>
                         {pokemon1 && pokemon1.abilities && pokemon1.abilities.map(x => {
-                            return <li>{x.ability.name}</li>
+                            return <li key={x.ability.name}>{x.ability.name}</li>
                         })}
                     </ul>
-                    <button onClick={() => this.attackPlayer(1,false)} disabled={!pokemon1PageData.turn}>Attack!</button>
-                    <button onClick={() => this.attackPlayer(1,true)} disabled={!pokemon1PageData.turn || pokemon1PageData.specialAttackUsed}>Special Attack!</button>
+                    <button onClick={() => this.attackPlayer(1,false)} disabled={!pokemon1PageData.turn}>Attack! ({pokemon1 && pokemon1.stats && pokemon1.stats[1].base_stat})</button>
+                    <button onClick={() => this.attackPlayer(1,true)} disabled={!pokemon1PageData.turn || pokemon1PageData.specialAttackUsed}>Special Attack! ({pokemon1 && pokemon1.stats && pokemon1.stats[3].base_stat})</button>
                 </div>
                 <div className={styles.card}>
                     <h2>{ pokemon2.name }</h2>
                     <div>Total Health: <span className={styles.red}>{pokemon2PageData.health}</span></div>
-                    <img src={pokemon1 && pokemon1.id && `https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${pokemon2.id}.svg`} />
+                    <img 
+                        src={pokemon2 && pokemon2.id && `https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${pokemon2.id}.svg`} 
+                        alt="No images found"
+                        />
                     <div><b>Abilities:</b></div>
                     <ul>
                         {pokemon2 && pokemon2.abilities && pokemon2.abilities.map(x => {
-                            return <li>{x.ability.name}</li>
+                            return <li key={x.ability.name}>{x.ability.name}</li>
                         })}
                     </ul>
-                    <button onClick={() => this.attackPlayer(2,false)} disabled={!pokemon2PageData.turn}>Attack!</button>
-                    <button onClick={() => this.attackPlayer(2,true)} disabled={!pokemon2PageData.turn || pokemon2PageData.specialAttackUsed}>Special Attack!</button>
+                    <button onClick={() => this.attackPlayer(2,false)} disabled={!pokemon2PageData.turn}>Attack! ({pokemon2 && pokemon2.stats && pokemon2.stats[1].base_stat})</button>
+                    <button onClick={() => this.attackPlayer(2,true)} disabled={!pokemon2PageData.turn || pokemon2PageData.specialAttackUsed}>Special Attack! ({pokemon2 && pokemon2.stats && pokemon2.stats[3].base_stat})</button>
                 </div>
             </div>
         )
