@@ -74,14 +74,17 @@ export default class PokemonContainer extends React.Component {
                 }
                 {
                     hasWinner && 
-                    <div>
-                        <h2>Winner: {winner && winner.name}</h2>
-                        <img 
-                            src={winner && winner.id && `https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${winner.id}.svg`} 
-                            alt="No images found"
-                        />
-                        <br></br>
-                        <button onClick={this.battleAgain}>Battle Again!</button>
+                    <div className={styles.grid}>
+                         <div className={styles.card}>
+                            <h2>Winner: {winner && winner.name}</h2>
+                            <img
+                                className={styles.battleImage}
+                                src={winner && winner.id && `https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${winner.id}.svg`} 
+                                alt="No images found"
+                            />
+                            <br></br>
+                            <button className={styles.niceButton} onClick={this.battleAgain}>Battle Again!</button>
+                        </div>
                     </div>
                 }
                 
