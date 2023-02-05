@@ -11,12 +11,16 @@ export default class PokemonBattle extends React.Component {
             pokemon1PageData: {
                 health: 0,
                 specialAttackUsed: false,
-                eliminated: false
+                eliminated: false,
+                turn: true,
+                imageUrl: ''
             },
             pokemon2PageData: {
                 health: 0,
                 specialAttackUsed: false,
-                eliminated: false
+                eliminated: false,
+                turn: true,
+                imageUrl: ''
             }
         }
     }
@@ -26,7 +30,6 @@ export default class PokemonBattle extends React.Component {
         let res = await fetch(url);
         let pokemonData = await res.json();
         console.log(pokemon);
-        const heads = (Math.floor(Math.random() * 2) == 0);
         const totalHealth = pokemonData.stats[0].base_stat + pokemonData.stats[2].base_stat; // HP + Defense
         if (player === 1) {
             await this.setState(
@@ -35,7 +38,7 @@ export default class PokemonBattle extends React.Component {
                     pokemon1PageData: {
                         health: totalHealth, 
                         specialAttackUsed: false,
-                        turn: heads
+                        turn: true
                     }
                 }
             )
@@ -47,7 +50,7 @@ export default class PokemonBattle extends React.Component {
                     pokemon2PageData: {
                         health: totalHealth, 
                         specialAttackUsed: false,
-                        turn: !heads
+                        turn: true
                     }
                 }
             )
@@ -59,6 +62,7 @@ export default class PokemonBattle extends React.Component {
         await this.getPokemonData(player1, 1);
         await this.getPokemonData(player2, 2);
     }
+    
 
     attackPlayer = async (playerInitiated, isSpecial) => {
         let attackAmount = 0;
@@ -92,7 +96,6 @@ export default class PokemonBattle extends React.Component {
                 newHealth = 0;
                 this.props.onWinnerSelected(this.state.pokemon2);
             }
-            console.log(this.state);
             await this.setState(
                 {
                     pokemon1PageData: {
@@ -111,6 +114,10 @@ export default class PokemonBattle extends React.Component {
         
     };
 
+    addImageFallback(event) {
+        console.log(event);
+    }
+
     render() {
         const { pokemon1, pokemon2, pokemon1PageData, pokemon2PageData } = this.state;
 
@@ -122,7 +129,8 @@ export default class PokemonBattle extends React.Component {
                     <img 
                         className={styles.battleImage}
                         src={pokemon1 && pokemon1.id && `https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${pokemon1.id}.svg`} 
-                        alt="No image found"    
+                        alt="No image found"
+                        // onError={addImageFallback}
                     />
                     <div><b>Abilities:</b></div>
                     <ul>
@@ -140,6 +148,7 @@ export default class PokemonBattle extends React.Component {
                         className={styles.battleImage}
                         src={pokemon2 && pokemon2.id && `https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${pokemon2.id}.svg`} 
                         alt="No images found"
+                        // onError={addImageFallback}
                         />
                     <div><b>Abilities:</b></div>
                     <ul>
