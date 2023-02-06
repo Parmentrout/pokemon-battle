@@ -30,6 +30,9 @@ export default class PokemonBattle extends React.Component {
         let res = await fetch(url);
         let pokemonData = await res.json();
         const totalHealth = pokemonData.stats[0].base_stat + pokemonData.stats[2].base_stat; // HP + Defense
+
+        console.log(pokemonData);
+
         const imageUrl = (pokemonData.sprites.other.dream_world.default) 
             ? pokemonData.sprites.other.dream_world.front_default 
             : pokemonData.sprites.other.home.front_default
@@ -71,9 +74,19 @@ export default class PokemonBattle extends React.Component {
 
     attackPlayer = async (playerInitiated, isSpecial) => {
         let attackAmount = 0;
+        const imageUrl1 = (this.state.pokemon1.sprites.other.dream_world.default) 
+            ? this.state.pokemon1.sprites.other.dream_world.front_default 
+            : this.state.pokemon1.sprites.other.home.front_default;
+
+        const imageUrl2 = (this.state.pokemon2.sprites.other.dream_world.default) 
+            ? this.state.pokemon2.sprites.other.dream_world.front_default 
+            : this.state.pokemon2.sprites.other.home.front_default;
+        
         if (playerInitiated === 1) {
             attackAmount = isSpecial ? this.state.pokemon1.stats[3].base_stat : this.state.pokemon1.stats[1].base_stat;
             let newHealth = this.state.pokemon2PageData.health - attackAmount;
+            
+
             if (newHealth < 0 ) { 
                 newHealth = 0;
                 this.props.onWinnerSelected(this.state.pokemon1);
@@ -83,12 +96,14 @@ export default class PokemonBattle extends React.Component {
                     pokemon1PageData: {
                         health: this.state.pokemon1PageData.health,
                         specialAttackUsed: isSpecial,
-                        turn: false
+                        turn: false,
+                        imageUrl: imageUrl1
                     },
                     pokemon2PageData: {
                         health: newHealth,
                         specialAttackUsed: this.state.pokemon2PageData.specialAttackUsed,
-                        turn: true
+                        turn: true,
+                        imageUrl: imageUrl2
                     }
                 }
             )
@@ -106,39 +121,20 @@ export default class PokemonBattle extends React.Component {
                     pokemon1PageData: {
                         health: newHealth, 
                         specialAttackUsed: this.state.pokemon1PageData.specialAttackUsed,
-                        turn: true
+                        turn: true,
+                        imageUrl: imageUrl1
                     },
                     pokemon2PageData: {
                         health: this.state.pokemon2PageData.health,
                         specialAttackUsed: isSpecial,
-                        turn: false
+                        turn: false,
+                        imageUrl: imageUrl2
                     }
                 }
             )
         }
         
     };
-
-    // addImageFallback = (id) => {
-    //     console.log(this.state.pokemon1);
-    //     let backupImageUrl = this.state.pokemon1?.sprites?.front_default;
-
-    //     if (id === 1) {
-    //          this.setState(
-    //             { 
-    //                 pokemon1PageData: {
-    //                     imageUrl: backupImageUrl
-    //                 }
-    //             });
-    //     } else {
-    //          this.setState(
-    //             { 
-    //                 pokemon2PageData: {
-    //                     imageUrl: backupImageUrl
-    //                 }
-    //             });
-    //     }
-    // }
 
     render() {
         const { pokemon1, pokemon2, pokemon1PageData, pokemon2PageData } = this.state;

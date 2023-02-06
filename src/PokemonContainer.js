@@ -10,7 +10,8 @@ export default class PokemonContainer extends React.Component {
             pokemon1: '',
             pokemon2: '',
             beginBattle: false,
-            hasWinner: false
+            hasWinner: false,
+            winnerUrl: ''
         }
     }
 
@@ -25,10 +26,15 @@ export default class PokemonContainer extends React.Component {
     }
     
     onWinnerDeclared = async (winner) => {
+        const image = (winner.sprites.other.dream_world.default) 
+            ? winner.sprites.other.dream_world.front_default 
+            : winner.sprites.other.home.front_default;
+
         await this.setState(
             {
                 hasWinner: true,
-                winner: winner
+                winner: winner,
+                winnerUrl: image
             }
         );
     }
@@ -52,7 +58,7 @@ export default class PokemonContainer extends React.Component {
 
     render() {
         const pokemonNames = this.props.allPokemon;
-        const { beginBattle, pokemon1, pokemon2, hasWinner, winner } = this.state;
+        const { beginBattle, pokemon1, pokemon2, hasWinner, winner, winnerUrl } = this.state;
         return (
             <div>
                 {!beginBattle && !hasWinner && <div className={styles.grid}>
@@ -79,7 +85,7 @@ export default class PokemonContainer extends React.Component {
                             <h2>Winner: {winner && winner.name}</h2>
                             <img
                                 className={styles.battleImage}
-                                src={winner && winner.id && `https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${winner.id}.svg`} 
+                                src={winnerUrl} 
                                 alt="No images found"
                             />
                             <br></br>
