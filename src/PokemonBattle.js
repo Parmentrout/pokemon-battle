@@ -29,8 +29,11 @@ export default class PokemonBattle extends React.Component {
         const url = `https://pokeapi.co/api/v2/pokemon/${pokemon}`;
         let res = await fetch(url);
         let pokemonData = await res.json();
-        console.log(pokemon);
         const totalHealth = pokemonData.stats[0].base_stat + pokemonData.stats[2].base_stat; // HP + Defense
+        const imageUrl = (pokemonData.sprites.other.dream_world.default) 
+            ? pokemonData.sprites.other.dream_world.front_default 
+            : pokemonData.sprites.other.home.front_default
+
         if (player === 1) {
             await this.setState(
                 { 
@@ -38,7 +41,8 @@ export default class PokemonBattle extends React.Component {
                     pokemon1PageData: {
                         health: totalHealth, 
                         specialAttackUsed: false,
-                        turn: true
+                        turn: true,
+                        imageUrl
                     }
                 }
             )
@@ -50,7 +54,8 @@ export default class PokemonBattle extends React.Component {
                     pokemon2PageData: {
                         health: totalHealth, 
                         specialAttackUsed: false,
-                        turn: true
+                        turn: true,
+                        imageUrl
                     }
                 }
             )
@@ -114,9 +119,26 @@ export default class PokemonBattle extends React.Component {
         
     };
 
-    addImageFallback(event) {
-        console.log(event);
-    }
+    // addImageFallback = (id) => {
+    //     console.log(this.state.pokemon1);
+    //     let backupImageUrl = this.state.pokemon1?.sprites?.front_default;
+
+    //     if (id === 1) {
+    //          this.setState(
+    //             { 
+    //                 pokemon1PageData: {
+    //                     imageUrl: backupImageUrl
+    //                 }
+    //             });
+    //     } else {
+    //          this.setState(
+    //             { 
+    //                 pokemon2PageData: {
+    //                     imageUrl: backupImageUrl
+    //                 }
+    //             });
+    //     }
+    // }
 
     render() {
         const { pokemon1, pokemon2, pokemon1PageData, pokemon2PageData } = this.state;
@@ -128,9 +150,8 @@ export default class PokemonBattle extends React.Component {
                     <div>Total Health: <span className={styles.red}>{pokemon1PageData.health}</span></div>
                     <img 
                         className={styles.battleImage}
-                        src={pokemon1 && pokemon1.id && `https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${pokemon1.id}.svg`} 
+                        src={pokemon1PageData?.imageUrl} 
                         alt="No image found"
-                        // onError={addImageFallback}
                     />
                     <div><b>Abilities:</b></div>
                     <ul>
@@ -146,9 +167,8 @@ export default class PokemonBattle extends React.Component {
                     <div>Total Health: <span className={styles.red}>{pokemon2PageData.health}</span></div>
                     <img
                         className={styles.battleImage}
-                        src={pokemon2 && pokemon2.id && `https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${pokemon2.id}.svg`} 
+                        src={pokemon2PageData.imageUrl} 
                         alt="No images found"
-                        // onError={addImageFallback}
                         />
                     <div><b>Abilities:</b></div>
                     <ul>
