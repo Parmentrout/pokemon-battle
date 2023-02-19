@@ -13,25 +13,75 @@ export default class PokemonBattle extends React.Component {
                 specialAttackUsed: false,
                 eliminated: false,
                 turn: true,
-                imageUrl: ''
+                imageUrl: '',
+                evolvesTo: ''
             },
             pokemon2PageData: {
                 health: 0,
                 specialAttackUsed: false,
                 eliminated: false,
                 turn: true,
-                imageUrl: ''
+                imageUrl: '',
+                evolvesTo: ''
             }
         }
     }
 
-    getPokemonData = async (pokemon, player) => {
-        const url = `https://pokeapi.co/api/v2/pokemon/${pokemon}`;
-        let res = await fetch(url);
-        let pokemonData = await res.json();
-        const totalHealth = pokemonData.stats[0].base_stat + pokemonData.stats[2].base_stat; // HP + Defense
+    getEvolutionData = async (pokemon) => {
+        let evolvesTo = '';
 
-        console.log(pokemonData);
+        // First we need to get the species of the pokemon
+        const speciesUrl = `https://pokeapi.co/api/v2/pokemon-species/${pokemon}`;
+        let speciesRes = await fetch(speciesUrl);
+        let species = await speciesRes.json();
+        let evolveUrl = species.evolution_chain.url;
+
+        // Next we pull the evolution chain
+        let evolveResponse = await fetch(evolveUrl);
+        let evolveData = await evolveResponse.json();
+
+        // Now we need to iteratively recurse the chain to find out where we are and what is next
+        if (evolveData && evolveData.chain && evolveData.chain.species) {
+            const firstLayer = evolveData.chain.species.name;
+            const secondLayer = evolveData.chain.evolves_to[0].species.name;
+            const thirdLayer = evolveData.chain.evolves_to[0].evolves_to.length ?
+                evolveData.chain.evolves_to[0].evolves_to[0].species.name : '';
+        
+
+            switch (pokemon) {
+                case firstLayer:
+                    evolvesTo = secondLayer;
+                    break;
+                case secondLayer:
+                    evolvesTo = thirdLayer;
+                    break;
+                case thirdLayer:
+                    {
+                        // Check for varieties and return one of the varieties
+                        let varieties = species.varieties.filter(x => x.pokemon.name !== pokemon);
+                        console.log(varieties);
+                        if (varieties.length) {
+                            const random = Math.floor(Math.random() * varieties.length);
+                            evolvesTo = varieties[random].pokemon.name;
+                        }
+                    }
+                    break;
+            }
+           
+        }
+        
+        return evolvesTo;
+    }
+
+    getPokemonData = async (pokemon, player) => {
+        // Get details
+        const getUrl = `https://pokeapi.co/api/v2/pokemon/${pokemon}`;
+        let res = await fetch(getUrl);
+        let pokemonData = await res.json();
+
+        const totalHealth = pokemonData.stats[0].base_stat + pokemonData.stats[2].base_stat; // HP + Defense
+        const evolvesTo = await this.getEvolutionData(pokemonData.name);
+        console.log(evolvesTo);
 
         const imageUrl = (pokemonData.sprites.other.dream_world.default) 
             ? pokemonData.sprites.other.dream_world.front_default 

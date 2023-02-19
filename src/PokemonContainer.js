@@ -40,7 +40,6 @@ export default class PokemonContainer extends React.Component {
     }
 
     canBeginBattle = async () => {
-        console.log(this.state);
         if (this.state.pokemon1 && this.state.pokemon2) {
             await this.setState({beginBattle: true})
         }
