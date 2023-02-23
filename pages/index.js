@@ -31,7 +31,7 @@ export default function Home({ preRenderedData }) {
           <code className={styles.code}>{JSON.stringify(dataInsideTheComponent)}</code>
         </p> */}
 
-        <PokemonContainer allPokemon={pokemonNames} />
+        <PokemonContainer className={styles.center} allPokemon={pokemonNames} />
       </main>
 
       <footer className={styles.footer}>

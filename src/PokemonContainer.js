@@ -59,7 +59,7 @@ export default class PokemonContainer extends React.Component {
         const pokemonNames = this.props.allPokemon;
         const { beginBattle, pokemon1, pokemon2, hasWinner, winner, winnerUrl } = this.state;
         return (
-            <div>
+            <div className={styles.center}>
                 {!beginBattle && !hasWinner && <div className={styles.grid}>
                         <div className={styles.card}>
                             <h2>Player 1 &rarr;</h2>

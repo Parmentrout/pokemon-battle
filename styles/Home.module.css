@@ -163,3 +163,8 @@
     opacity: 0.4;
     cursor: not-allowed;
 }
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
