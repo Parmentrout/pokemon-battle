@@ -34,8 +34,15 @@ export default class PokemonBattle extends React.Component {
 
         // First we need to get the species of the pokemon
         const speciesUrl = `https://pokeapi.co/api/v2/pokemon-species/${pokemon}`;
-        let speciesRes = await fetch(speciesUrl);
-        let species = await speciesRes.json();
+
+        let species;
+        try {
+            const speciesRes = await fetch(speciesUrl);
+            species = await speciesRes.json();
+        } catch (e) {
+            console.log(e);
+            return '';
+        }
         let evolveUrl = species.evolution_chain.url;
 
         // Next we pull the evolution chain
