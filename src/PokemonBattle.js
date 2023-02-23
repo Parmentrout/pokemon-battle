@@ -29,6 +29,10 @@ export default class PokemonBattle extends React.Component {
         }
     }
 
+    getRandomPokemon = (pokemonList) => {
+        return Math.floor(Math.random() * pokemonList.length);
+    }
+
     getEvolutionData = async (pokemon) => {
         let evolvesTo = '';
 
@@ -59,24 +63,31 @@ export default class PokemonBattle extends React.Component {
                 thirdLayer = evolveData.chain.evolves_to[0].evolves_to.length ?
                     evolveData.chain.evolves_to[0].evolves_to[0].species.name : '';
             }
-        
 
             switch (pokemon) {
                 case firstLayer:
-                    evolvesTo = secondLayer;
+                    {
+                        const evolveList = evolveData.chain.evolves_to;
+                        if (evolveList.length > 1) { // Eevee edge case
+                            const randomEevee = this.getRandomPokemon(evolveList);
+                            evolvesTo = evolveList[randomEevee].species.name; 
+                        } else {
+                            evolvesTo = secondLayer;
+                        }
+                    }
                     break;
                 case secondLayer:
                     evolvesTo = thirdLayer;
                     break;
                 case thirdLayer:
                     {
-
-                        // // Check for varieties and return one of the varieties
-                        // let varieties = species.varieties.filter(x => x.pokemon.name !== pokemon);
-                        // if (varieties.length) {
-                        //     const random = Math.floor(Math.random() * varieties.length);
-                        //     evolvesTo = varieties[random].pokemon.name;
-                        // }
+                        // Check for varieties and return one of the varieties
+                        let varieties = species && species.varieties.length 
+                            ? species.varieties.filter(x => x.pokemon.name !== pokemon): [];
+                        if (varieties.length) {
+                            const random = this.getRandomPokemon(varieties);
+                            evolvesTo = varieties[random].pokemon.name;
+                        }
                     }
                     break;
             }

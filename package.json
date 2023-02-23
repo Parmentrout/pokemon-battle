@@ -7,7 +7,7 @@
     "build": "next build && next export",
     "start": "next start",
     "lint": "next lint",
-    "publish": "amplify publish"
+    "deploy": "amplify publish"
   },
   "dependencies": {
     "next": "13.0.6",
