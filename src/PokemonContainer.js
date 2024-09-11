@@ -57,6 +57,7 @@ export default class PokemonContainer extends React.Component {
 
     render() {
         const pokemonNames = this.props.allPokemon;
+
         const { beginBattle, pokemon1, pokemon2, hasWinner, winner, winnerUrl } = this.state;
         return (
             <div className={styles.center}>

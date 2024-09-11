@@ -3,13 +3,13 @@
 import React from 'react';
 import styles from '../styles/TypeAheadDropDown.module.css';
 
-
 export default class TypeAheadDropDown extends React.Component {
  constructor(props) {
    super(props);
    this.state = {
      suggestions: [],
-     text:''
+     text: '',
+     addedPokemon: [],
    }
  }
  
