@@ -2,6 +2,8 @@ import TypeAheadDropDown from "./TypeAheadDropDown";
 import React, { useState } from 'react';
 import styles from '../styles/Home.module.css'
 import PokemonBattle from "./PokemonBattle";
+import { getCustomPokemon } from '../src/added-pokemon';
+
 
 export default class PokemonContainer extends React.Component {
     constructor(props) {
@@ -26,9 +28,7 @@ export default class PokemonContainer extends React.Component {
     }
     
     onWinnerDeclared = async (winner) => {
-        const image = (winner.sprites.other.dream_world.default) 
-            ? winner.sprites.other.dream_world.front_default 
-            : winner.sprites.other.home.front_default;
+        const image = winner.sprites.other.home.front_default
 
         await this.setState(
             {
@@ -57,7 +57,6 @@ export default class PokemonContainer extends React.Component {
 
     render() {
         const pokemonNames = this.props.allPokemon;
-
         const { beginBattle, pokemon1, pokemon2, hasWinner, winner, winnerUrl } = this.state;
         return (
             <div className={styles.center}>

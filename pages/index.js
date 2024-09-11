@@ -3,6 +3,7 @@ import Head from 'next/head'
 import TypeAheadDropDown from '../src/TypeAheadDropDown';
 import PokemonContainer from '../src/PokemonContainer';
 import styles from '../styles/Home.module.css'
+import { getCustomPokemon } from '../src/added-pokemon';
 
 export default function Home({ preRenderedData }) {
 
@@ -46,5 +47,7 @@ export async function getStaticProps(context) {
   let res = await fetch(url);
   let allPokemon = await res.json();
   allPokemon = allPokemon.results.map(x => x.name);
+  const newPokemon = getCustomPokemon().map(x => x.name);
+  allPokemon.push(...newPokemon);
   return {props: {preRenderedData: allPokemon}}
 }

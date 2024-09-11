@@ -1,6 +1,7 @@
 import { TEMPORARY_REDIRECT_STATUS } from "next/dist/shared/lib/constants";
 import React from "react"
 import styles from '../styles/Home.module.css'
+import { getCustomPokemon } from "./added-pokemon";
 
 export default class PokemonBattle extends React.Component {
     constructor(props) {
@@ -98,18 +99,24 @@ export default class PokemonBattle extends React.Component {
     }
 
     getPokemonData = async (pokemon, player, lostHealth) => {
-        // Get details
-        const getUrl = `https://pokeapi.co/api/v2/pokemon/${pokemon}`;
-        let res = await fetch(getUrl);
-        let pokemonData = await res.json();
-
+        // Check to see if it's a custom pokemon
+        const allCustomPokemon = getCustomPokemon();
+        const customPokemon = allCustomPokemon.find(x => x.name === pokemon);
+        let pokemonData;
+        if (customPokemon) {
+            pokemonData = customPokemon;
+        } else {
+            const getUrl = `https://pokeapi.co/api/v2/pokemon/${pokemon}`;
+            let res = await fetch(getUrl);
+            pokemonData = await res.json();
+        }
+       
+        console.log(pokemonData);
         const totalHealth = pokemonData.stats[0].base_stat + pokemonData.stats[2].base_stat - lostHealth; // HP + Defense
         const evolvesTo = await this.getEvolutionData(pokemonData.name);
-        console.log(evolvesTo);
+        
 
-        const imageUrl = (pokemonData.sprites.other.dream_world.default) 
-            ? pokemonData.sprites.other.dream_world.front_default 
-            : pokemonData.sprites.other.home.front_default
+        const imageUrl = pokemonData.sprites.other.home.front_default
 
         if (player === 1) {
             await this.setState(
@@ -156,13 +163,9 @@ export default class PokemonBattle extends React.Component {
 
     attackPlayer = async (playerInitiated, isSpecial) => {
         let attackAmount = 0;
-        const imageUrl1 = (this.state.pokemon1.sprites.other.dream_world.default) 
-            ? this.state.pokemon1.sprites.other.dream_world.front_default 
-            : this.state.pokemon1.sprites.other.home.front_default;
+        const imageUrl1 = this.state.pokemon1.sprites.other.home.front_default
 
-        const imageUrl2 = (this.state.pokemon2.sprites.other.dream_world.default) 
-            ? this.state.pokemon2.sprites.other.dream_world.front_default 
-            : this.state.pokemon2.sprites.other.home.front_default;
+        const imageUrl2 = this.state.pokemon2.sprites.other.home.front_default
         
         if (playerInitiated === 1) {
             attackAmount = isSpecial ? this.state.pokemon1.stats[3].base_stat : this.state.pokemon1.stats[1].base_stat;
