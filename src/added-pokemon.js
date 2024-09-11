@@ -12,7 +12,7 @@ export const getCustomPokemon = () => [
             { ability: { name: "water tornado" } },
             { ability: { name: "water punch" } },
         ],
-        sprites: { other: { dream_world: { front_default: '/blippers.webp'}}}
+        sprites: { other: { home: { front_default: '/blippers.webp'}}}
     },
     {
         name: 'grassaconda',
@@ -27,6 +27,6 @@ export const getCustomPokemon = () => [
             { ability: { name: "leaf storm" } },
             { ability: { name: "vine whip" } },
         ],
-        sprites: { other: { dream_world: { front_default: '/grassaconda.webp'}}}
+        sprites: { other: { home: { front_default: '/grassaconda.webp'}}}
     }
 ];
