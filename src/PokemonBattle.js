@@ -34,9 +34,16 @@ export default class PokemonBattle extends React.Component {
         return Math.floor(Math.random() * pokemonList.length);
     }
 
-    getEvolutionData = async (pokemon) => {
+    getEvolutionData = async (pokemonData, isCustom) => {
+
+        // For any custom data
+        if (pokemonData.evolvesTo || isCustom) {
+            return pokemonData.evolvesTo || '';
+        }
+
         let evolvesTo = '';
 
+        const pokemon = pokemonData.name;
         // First we need to get the species of the pokemon
         const speciesUrl = `https://pokeapi.co/api/v2/pokemon-species/${pokemon}`;
 
@@ -111,10 +118,8 @@ export default class PokemonBattle extends React.Component {
             pokemonData = await res.json();
         }
        
-        console.log(pokemonData);
         const totalHealth = pokemonData.stats[0].base_stat + pokemonData.stats[2].base_stat - lostHealth; // HP + Defense
-        const evolvesTo = await this.getEvolutionData(pokemonData.name);
-        
+        const evolvesTo = await this.getEvolutionData(pokemonData, customPokemon);
 
         const imageUrl = pokemonData.sprites.other.home.front_default
 
