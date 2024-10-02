@@ -148,4 +148,63 @@ export const getCustomPokemon = () => [
         ],
         sprites: { other: { home: { front_default: '/dragogem.webp'}}}
     },
+    {
+        name: 'ninjascare',
+        stats: [
+            { base_stat: 200 }, //hp
+            { base_stat: 150 }, //attack
+            { base_stat: 0 }, // defense
+            { base_stat: 200 }, // special attack
+        ],
+        abilities: [ 
+            { ability: { name: "Nightmare" } }, 
+            { ability: { name: "Trick or treat" } }, 
+            { ability: { name: "Shadow Ball" } },
+        ],
+        sprites: { other: { home: { front_default: '/ninjascare.webp'}}}
+    },
+    {
+        name: 'fatley',
+        stats: [
+            { base_stat: 200 }, //hp
+            { base_stat: 20 }, //attack
+            { base_stat: 0 }, // defense
+            { base_stat: 20 }, // special attack
+        ],
+        abilities: [ 
+            { ability: { name: "Butt Ball" } }, 
+            { ability: { name: "Scratch a little" } }, 
+            { ability: { name: "Me first" } },
+        ],
+        sprites: { other: { home: { front_default: '/fatley.webp'}}}
+    },
+    {
+        name: 'tyro',
+        stats: [
+            { base_stat: 235 }, //hp
+            { base_stat: 91 }, //attack
+            { base_stat: 0 }, // defense
+            { base_stat: 119 }, // special attack
+        ],
+        abilities: [ 
+            { ability: { name: "Headbutt" } }, 
+            { ability: { name: "Super ultra punch" } }, 
+        ],
+        sprites: { other: { home: { front_default: '/tyro.webp'}}}
+    },
+    {
+        name: 'oklaweos',
+        stats: [
+            { base_stat: 250 }, //hp
+            { base_stat: 250 }, //attack
+            { base_stat: 0 }, // defense
+            { base_stat: 250 }, // special attack
+        ],
+        abilities: [ 
+            { ability: { name: "5 Flames" } }, 
+            { ability: { name: "Dragon ultra pulse" } }, 
+            { ability: { name: "Mystic portal" } },
+        ],
+        sprites: { other: { home: { front_default: '/oklaweos.webp'}}}
+    },
 ];
