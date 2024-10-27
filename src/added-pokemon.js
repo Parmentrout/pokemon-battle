@@ -207,4 +207,150 @@ export const getCustomPokemon = () => [
         ],
         sprites: { other: { home: { front_default: '/oklaweos.webp'}}}
     },
+    {
+        name: 'oklawnos',
+        stats: [
+            { base_stat: 250 }, //hp
+            { base_stat: 250 }, //attack
+            { base_stat: 0 }, // defense
+            { base_stat: 250 }, // special attack
+        ],
+        abilities: [ 
+            { ability: { name: "5 Flames" } }, 
+            { ability: { name: "Dragon ultra pulse" } }, 
+            { ability: { name: "Mystic portal" } },
+        ],
+        sprites: { other: { home: { front_default: '/oklawnos.webp'}}}
+    },
+    {
+        name: 'gabba',
+        stats: [
+            { base_stat: 20 }, //hp
+            { base_stat: 2 }, //attack
+            { base_stat: 0 }, // defense
+            { base_stat: 1 }, // special attack
+        ],
+        abilities: [ 
+            { ability: { name: "Touch" } }, 
+            { ability: { name: "Me First" } }, 
+            { ability: { name: "Weak Bite" } },
+        ],
+        sprites: { other: { home: { front_default: '/gabba.webp'}}}
+    },
+    {
+        name: 'trunk',
+        stats: [
+            { base_stat: 205 }, //hp
+            { base_stat: 58 }, //attack
+            { base_stat: 0 }, // defense
+            { base_stat: 42 }, // special attack
+        ],
+        abilities: [ 
+            { ability: { name: "Trunk hit" } }, 
+            { ability: { name: "Stomp" } }, 
+        ],
+        sprites: { other: { home: { front_default: '/trunk.webp'}}}
+    },
+    {
+        name: 'stoneflame',
+        stats: [
+            { base_stat: 350 }, //hp
+            { base_stat: 200 }, //attack
+            { base_stat: 0 }, // defense
+            { base_stat: 150 }, // special attack
+        ],
+        abilities: [ 
+            { ability: { name: "Erupt" } }, 
+            { ability: { name: "Stone blade" } }, 
+            { ability: { name: "Flame spin" } }, 
+        ],
+        sprites: { other: { home: { front_default: '/stoneflame.webp'}}}
+    },
+    {
+        name: 'zonami',
+        stats: [
+            { base_stat: 289 }, //hp
+            { base_stat: 169 }, //attack
+            { base_stat: 0 }, // defense
+            { base_stat: 188 }, // special attack
+        ],
+        abilities: [ 
+            { ability: { name: "Death ray" } }, 
+            { ability: { name: "Giant scratch" } },  
+        ],
+        sprites: { other: { home: { front_default: '/zonami.webp'}}}
+    },
+    {
+        name: 'oceano',
+        stats: [
+            { base_stat: 400 }, //hp
+            { base_stat: 250 }, //attack
+            { base_stat: 0 }, // defense
+            { base_stat: 150 }, // special attack
+        ],
+        abilities: [ 
+            { ability: { name: "Tidal wave" } }, 
+            { ability: { name: "Aqua tail" } },  
+            { ability: { name: "Water gun" } }, 
+        ],
+        sprites: { other: { home: { front_default: '/oceano.webp'}}}
+    },
+    {
+        name: 'Future Teller',
+        stats: [
+            { base_stat: 300 }, //hp
+            { base_stat: 150 }, //attack
+            { base_stat: 0 }, // defense
+            { base_stat: 150 }, // special attack
+        ],
+        abilities: [ 
+            { ability: { name: "Future Strike" } }, 
+            { ability: { name: "Quill Strike" } },  
+        ],
+        sprites: { other: { home: { front_default: '/future-teller.jpeg'}}}
+    },
+    {
+        name: 'Super Strike',
+        stats: [
+            { base_stat: 300 }, //hp
+            { base_stat: 188 }, //attack
+            { base_stat: 0 }, // defense
+            { base_stat: 145 }, // special attack
+        ],
+        abilities: [ 
+            { ability: { name: "Mace Attack" } }, 
+            { ability: { name: "Precalculus Strike" } },  
+        ],
+        sprites: { other: { home: { front_default: '/super-strike.jpeg'}}}
+    },
+    {
+        name: 'Zoxarus',
+        stats: [
+            { base_stat: 520 }, //hp
+            { base_stat: 299 }, //attack
+            { base_stat: 0 }, // defense
+            { base_stat: 230 }, // special attack
+        ],
+        abilities: [ 
+            { ability: { name: "Super Ultra Mega Punch" } }, 
+            { ability: { name: "Super Ultra Bite" } },  
+            { ability: { name: "Super Ultra Death Ray" } },
+        ],
+        sprites: { other: { home: { front_default: '/zoxarus.webp'}}}
+    },
+    {
+        name: 'Flame Hero',
+        stats: [
+            { base_stat: 520 }, //hp
+            { base_stat: 250 }, //attack
+            { base_stat: 0 }, // defense
+            { base_stat: 230 }, // special attack
+        ],
+        abilities: [ 
+            { ability: { name: "Fire Spin" } }, 
+            { ability: { name: "Ultra Flame" } },  
+            { ability: { name: "Fireball Shower" } },
+        ],
+        sprites: { other: { home: { front_default: '/flamehero.webp'}}}
+    },
 ];
