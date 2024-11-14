@@ -428,9 +428,9 @@ export const getCustomPokemon = () => [
         name: 'flaming-hot-cheetos',
         stats: [
             { base_stat: 195 }, //hp
-            { base_stat: 60 }, //attack
+            { base_stat: 90 }, //attack
             { base_stat: 0 }, // defense
-            { base_stat: 60 }, // special attack
+            { base_stat: 90 }, // special attack
         ],
         abilities: [ 
             { ability: { name: "Breathe flaming hot cheetos" } }, 

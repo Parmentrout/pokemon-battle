@@ -4,6 +4,7 @@ import TypeAheadDropDown from '../src/TypeAheadDropDown';
 import PokemonContainer from '../src/PokemonContainer';
 import styles from '../styles/Home.module.css'
 import { getCustomPokemon } from '../src/added-pokemon';
+import CustomPokemon from '../src/CustomPokemon';
 
 export default function Home({ preRenderedData }) {
 
@@ -26,13 +27,11 @@ export default function Home({ preRenderedData }) {
         <h1 className={styles.title}>
           Pokemon Battle
         </h1>
-{/* 
-        <p className={styles.description}>
-          <code className={styles.code}>{dataInsideTheComponent.testing ? dataInsideTheComponent.testing : ''}</code>
-          <code className={styles.code}>{JSON.stringify(dataInsideTheComponent)}</code>
-        </p> */}
 
         <PokemonContainer className={styles.center} allPokemon={pokemonNames} />
+
+        <CustomPokemon className={styles.center}></CustomPokemon>
+        
       </main>
 
       <footer className={styles.footer}>
