@@ -17,6 +17,7 @@ export const getCustomPokemon = () => [
     },
     {
         name: 'grassaconda',
+        evolvesTo: 'grassacobra',
         stats: [
             { base_stat: 205 }, //hp
             { base_stat: 100 }, //attack
@@ -352,5 +353,88 @@ export const getCustomPokemon = () => [
             { ability: { name: "Fireball Shower" } },
         ],
         sprites: { other: { home: { front_default: '/flamehero.webp'}}}
+    },
+    {
+        name: 'volcanic',
+        stats: [
+            { base_stat: 370 }, //hp
+            { base_stat: 180 }, //attack
+            { base_stat: 0 }, // defense
+            { base_stat: 166 }, // special attack
+        ],
+        abilities: [ 
+            { ability: { name: "Erupt" } }, 
+            { ability: { name: "Lava pulse" } },  
+        ],
+        sprites: { other: { home: { front_default: '/volcanic.webp'}}}
+    },
+    {
+        name: 'transtron',
+        stats: [
+            { base_stat: 520 }, //hp
+            { base_stat: 220}, //attack
+            { base_stat: 0 }, // defense
+            { base_stat: 220 }, // special attack
+        ],
+        abilities: [ 
+            { ability: { name: "Transform" } }, 
+            { ability: { name: "Tank blast" } },  
+        ],
+        sprites: { other: { home: { front_default: '/transtron.webp'}}}
+    },
+    {
+        name: 'cheetos',
+        evolvesTo: 'flaming-hot-cheetos',
+        stats: [
+            { base_stat: 100 }, //hp
+            { base_stat: 30}, //attack
+            { base_stat: 0 }, // defense
+            { base_stat: 30 }, // special attack
+        ],
+        abilities: [ 
+            { ability: { name: "Breath Cheetos" } }, 
+        ],
+        sprites: { other: { home: { front_default: '/cheetos.webp'}}}
+    },
+    {
+        name: 'animalitron',
+        stats: [
+            { base_stat: 500 }, //hp
+            { base_stat: 200 }, //attack
+            { base_stat: 0 }, // defense
+            { base_stat: 250 }, // special attack
+        ],
+        abilities: [ 
+            { ability: { name: "Roar of the Lion" } }, 
+            { ability: { name: "Animal Strike" } },  
+        ],
+        sprites: { other: { home: { front_default: '/animalitron.webp'}}}
+    },
+    {
+        name: 'grassacobra',
+        stats: [
+            { base_stat: 500 }, //hp
+            { base_stat: 200 }, //attack
+            { base_stat: 0 }, // defense
+            { base_stat: 250 }, // special attack
+        ],
+        abilities: [ 
+            { ability: { name: "Vine Whip" } }, 
+            { ability: { name: "Poison" } },  
+        ],
+        sprites: { other: { home: { front_default: '/grassacobra.webp'}}}
+    },
+    {
+        name: 'flaming-hot-cheetos',
+        stats: [
+            { base_stat: 195 }, //hp
+            { base_stat: 60 }, //attack
+            { base_stat: 0 }, // defense
+            { base_stat: 60 }, // special attack
+        ],
+        abilities: [ 
+            { ability: { name: "Breathe flaming hot cheetos" } }, 
+        ],
+        sprites: { other: { home: { front_default: '/flaming-hot-cheetos.webp'}}}
     },
 ];
