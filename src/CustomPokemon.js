@@ -12,7 +12,6 @@ export default class CustomPokemon extends React.Component {
     }
 
     showComponent = async () => {
-        console.log('firing');
         await this.setState({show: true, customPokemon: getCustomPokemon() });
     }
 
@@ -32,7 +31,7 @@ export default class CustomPokemon extends React.Component {
                     { 
                     customPokemon.map(pokemon => {
                     return (
-                    <div className={styles.card}>
+                    <div key={pokemon.name} className={styles.card}>
                         <h2>{ pokemon.name }</h2>
                         <div>Total Health: <span className={styles.red}>{pokemon.health}</span></div>
                         <img

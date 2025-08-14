@@ -437,4 +437,32 @@ export const getCustomPokemon = () => [
         ],
         sprites: { other: { home: { front_default: '/flaming-hot-cheetos.webp'}}}
     },
+    {
+        name: 'fury-gold',
+        stats: [
+            { base_stat: 500 }, //hp
+            { base_stat: 200 }, //attack
+            { base_stat: 0 }, // defense
+            { base_stat: 250 }, // special attack
+        ],
+        abilities: [ 
+            { ability: { name: "Gold rush" } }, 
+            { ability: { name: "Gold strike" } },  
+        ],
+        sprites: { other: { home: { front_default: '/fury-gold.png'}}}
+    },
+    {
+        name: 'tortellini',
+        stats: [
+            { base_stat: 150 }, //hp
+            { base_stat: 159 }, //attack
+            { base_stat: 0 }, // defense
+            { base_stat: 97 }, // special attack
+        ],
+        abilities: [ 
+            { ability: { name: "Eating tortellini" } }, 
+            { ability: { name: "Eating ravioli" } }, 
+        ],
+        sprites: { other: { home: { front_default: '/tortellini.png'}}}
+    },
 ];
